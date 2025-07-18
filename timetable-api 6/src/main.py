@@ -30,7 +30,13 @@ app.register_blueprint(messages_bp, url_prefix='/api')
 app.register_blueprint(profiles_bp, url_prefix='/api')
 
 # データベース設定
-app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(os.path.dirname(__file__), 'database', 'app.db')}"
+import os
+if os.environ.get('RENDER'):
+    # 本番環境用（メモリ内データベース）
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
+else:
+    # ローカル環境用
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database/timetable.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 with app.app_context():
