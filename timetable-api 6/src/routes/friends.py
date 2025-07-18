@@ -241,7 +241,7 @@ def send_friend_request():
         db.session.rollback()
         return jsonify({'error': str(e)}), 500
 
-@friends_bp.route('/friend-request/<int:request_id>/accept', methods=['POST'])
+@friends_bp.route('/friend-request/<request_id>/accept', methods=['POST'])
 def accept_friend_request(request_id):
     user = require_auth()
     if not user:
@@ -268,7 +268,7 @@ def accept_friend_request(request_id):
         db.session.rollback()
         return jsonify({'error': str(e)}), 500
 
-@friends_bp.route('/friend-request/<int:request_id>/reject', methods=['POST'])
+@friends_bp.route('/friend-request/<request_id>/reject', methods=['POST'])
 def reject_friend_request(request_id):
     user = require_auth()
     if not user:
@@ -333,7 +333,7 @@ def generate_qr_code():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@friends_bp.route('/add-friend/<int:user_id>', methods=['POST'])
+@friends_bp.route('/add-friend/<user_id>', methods=['POST'])
 def add_friend_by_qr(user_id):
     user = require_auth()
     if not user:
