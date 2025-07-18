@@ -80,7 +80,7 @@ def update_my_profile():
         db.session.rollback()
         return jsonify({'error': str(e)}), 500
 
-@profiles_bp.route('/profile/<int:user_id>', methods=['GET'])
+@profiles_bp.route('/profile/<user_id>', methods=['GET'])
 def get_user_profile(user_id):
     user = require_auth()
     if not user:

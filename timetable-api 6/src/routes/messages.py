@@ -40,7 +40,7 @@ def get_conversations():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@messages_bp.route('/conversations/<int:user_id>', methods=['GET'])
+@messages_bp.route('/conversations/<user_id>', methods=['GET'])
 def get_or_create_conversation(user_id):
     user = require_auth()
     if not user:
